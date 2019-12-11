@@ -1,39 +1,29 @@
-import contextlib
+import os
 
-import sqlalchemy as sa
-from aiogram import Dispatcher
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import scoped_session, sessionmaker
+from peewee import *
 
-from bot.config import DB_URL
-from bot.misc import executor
-
-engine = sa.create_engine(DB_URL)
-session_factory = sessionmaker(bind=engine)
-Session = scoped_session(session_factory)
+db = PostgresqlDatabase('users.db')
 
 
-@contextlib.contextmanager
-def db_session():
-    session = Session()
-    try:
-        yield session
-    except Exception:
-        session.rollback()
-    finally:
-        Session.remove()
+class BaseModel(Model):
+    class Meta:
+        database = db
 
 
-class Base(declarative_base()):
-    __abstract__ = True
+class User(BaseModel):
 
-    @classmethod
-    def get(cls, session, whereclause):
-        return session.query(cls).filter(whereclause).first()
+class Fraction(BaseModel):
+    title = CharField(null=False)
+    description = CharField(null=False)
+    leader = ForeignKeyField(User, backref='fraction')
 
+class User(BaseModel):
+    id = IntegerField(primary_key=True)
+    user_id = IntegerField(unique=True)
+    username = CharField(null=True)
+    first_name = CharField(null=True)
+    last_name = CharField(null=True)
+    fraction = ForeignKeyField(Fraction, backref='member')
 
-async def on_startup(dp: Dispatcher):
-    Base.metadata.create_all(engine)
-
-
-executor.on_startup(on_startup)
+if not os.path.exists('users.db'):
+    db.create_tables([User, Fraction])
