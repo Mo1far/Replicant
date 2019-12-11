@@ -11,6 +11,7 @@ class BaseModel(Model):
 
 
 class User(BaseModel):
+    pass
 
 class Fraction(BaseModel):
     title = CharField(null=False)
