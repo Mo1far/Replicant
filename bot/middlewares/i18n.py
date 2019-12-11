@@ -16,21 +16,21 @@ class ACLMiddleware(I18nMiddleware):
     def get_tg_lang(self, tg_user: types.User) -> str:
         lang = tg_user.language_code
         if lang:
-            lang = lang.split('-')[0]
+            lang = lang.split("-")[0]
         else:
-            lang = 'en'
+            lang = "en"
         return lang
 
     async def get_user_locale(self, action: str, args: Tuple[Any]):
         tg_user = types.User.get_current()
         *_, data = args
         if tg_user is None:
-            data['locale'] = 'en'
-            return 'en'
+            data["locale"] = "en"
+            return "en"
         is_new, user = await User.get_user(tg_user)
-        args[0].conf['is_new_user'] = is_new
-        data['locale'] = user.locale
-        data['user'] = user
+        args[0].conf["is_new_user"] = is_new
+        data["locale"] = user.locale
+        data["user"] = user
         lang = user.locale or self.get_tg_lang(tg_user)
         return lang
 
