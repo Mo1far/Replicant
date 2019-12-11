@@ -1,7 +1,6 @@
 from peewee import *
-from bot.models.application_record import BaseModel
 
-
+from bot.models.core import BaseModel
 from bot.models.fraction import Fraction
 
 
@@ -10,4 +9,4 @@ class User(BaseModel):
     username = CharField(null=True)
     first_name = CharField(null=True)
     last_name = CharField(null=True)
-    fraction = ForeignKeyField(Fraction, backref='member')
+    fraction = ForeignKeyField(Fraction, backref="member")
