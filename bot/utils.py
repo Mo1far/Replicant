@@ -2,8 +2,8 @@ import contextvars
 import functools
 from concurrent.futures import ThreadPoolExecutor
 
-from aiogram.utils.callback_data import CallbackData
 from aiogram import types
+from aiogram.utils.callback_data import CallbackData
 
 from bot.misc import loop
 

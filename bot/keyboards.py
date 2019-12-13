@@ -5,7 +5,8 @@ from babel import Locale
 
 from bot.middlewares.i18n import _
 from bot.utils import lang_cd, page_cd, settings_cd, word_cd
-from bot.models import is_owner
+
+# from bot.models import is_owner
 
 
 def settings(locale: str = None):
@@ -20,13 +21,13 @@ def settings(locale: str = None):
             _("Pagination", locale=locale), callback_data=page_cd.new("0")
         )
     )
-    if is_owner():
-        kb.add(
-            InlineKeyboardButton(
-                _("Admin panel", locale=locale), callback_data=settings_cd.new("admin")
-            )
-        )
-    return kb
+    # if is_owner():
+    #    kb.add(
+    #        InlineKeyboardButton(
+    #            _("Admin panel", locale=locale), callback_data=settings_cd.new("admin")
+    #        )
+    #    )
+    # return kb
 
 
 def lang(locale: str):

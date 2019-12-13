@@ -1,13 +1,13 @@
 import os
-import sys
 import ssl
+import sys
 
 import aiohttp
 import fastconf
 
 # Bot
 SKIP_UPDATES = True
-BOT_TOKEN = ""  # 123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11
+BOT_TOKEN = "635489344:AAGORsfiEuBS0X1P6reD90yqKQrImgn3tw4"
 LOGFILE = ""  # logs/bot.log
 OWNER_ID = 0  # your id for access to admin panel
 

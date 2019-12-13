@@ -3,8 +3,7 @@ import asyncio
 from aiogram import Dispatcher
 
 from bot.config import OWNER_ID
-from bot.misc import bot, executor, aiosched
-
+from bot.misc import aiosched, bot, executor
 
 # @aiosched.scheduled_job('interval', seconds=10)
 # async def hello():

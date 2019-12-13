@@ -1,9 +1,1 @@
-from . import (
-    commands,
-    errors,
-    inlines,
-    messages,
-    posts,
-    queries,
-    schedules,
-)
+from . import commands, errors, inlines, messages, posts, queries, schedules

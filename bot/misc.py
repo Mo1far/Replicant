@@ -16,12 +16,11 @@ from bot.config import (
     SKIP_UPDATES,
 )
 
-
 logging.basicConfig(level=logging.INFO, filename=LOGFILE)
 storage = RedisStorage2(**REDIS_SETTINGS) if REDIS_SETTINGS else MemoryStorage()
 loop = asyncio.get_event_loop()
 aiosched = AsyncIOScheduler()
 
-bot = Bot(token=BOT_TOKEN, parse_mode="HTML", proxy=PROXY_URL, proxy_auth=PROXY_AUTH)
+bot = Bot(token=BOT_TOKEN, parse_mode="HTML")
 dp = Dispatcher(bot, storage=storage)
 executor = Executor(dp, skip_updates=SKIP_UPDATES)

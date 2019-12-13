@@ -2,6 +2,7 @@ import logging
 
 from aiogram import types
 
+from bot.middlewares.i18n import _
 from bot.misc import dp
 
 log = logging.getLogger(__name__)
@@ -14,4 +15,4 @@ async def is_digit_message(msg: types.Message):
 
 @dp.message_handler()
 async def is_not_digit(msg: types.Message):
-    await msg.answer("Hello")
+    await msg.answer(_("Language"))

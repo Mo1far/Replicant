@@ -6,8 +6,7 @@ from aiogram.contrib.middlewares.i18n import I18nMiddleware
 
 from bot.config import I18N_DOMAIN, LOCALES_DIR
 from bot.misc import dp
-from bot.models import User
-
+from bot.models.user import User
 
 log = logging.getLogger(__name__)
 
