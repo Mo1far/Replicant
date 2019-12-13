@@ -24,9 +24,10 @@ class ACLMiddleware(I18nMiddleware):
         tg_user = types.User.get_current()
         *_, data = args
         if tg_user is None:
+            print(1)
             data["locale"] = "en"
             return "en"
-        is_new, user = await User.get_user(tg_user)
+        user, is_new = await User.get_user(tg_user)
         args[0].conf["is_new_user"] = is_new
         data["locale"] = user.locale
         data["user"] = user

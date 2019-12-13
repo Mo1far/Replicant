@@ -12,7 +12,8 @@ class User(BaseModel):
     first_name = CharField(null=True)
     last_name = CharField(null=True)
     fraction = ForeignKeyField(Fraction, backref="member", null=True)
-    locale = CharField(max_length=3, default="en")
+    locale = CharField(max_length=3, null=True)
+    start_conversation = TimestampField()
 
     @classmethod
     def create_user(cls, tg_user: types.User):
@@ -21,7 +22,7 @@ class User(BaseModel):
             username=tg_user.username,
             first_name=tg_user.first_name,
             last_name=tg_user.last_name,
-            locale=tg_user.locale,
+            locale=tg_user.language_code,
         )
 
     @classmethod
@@ -30,11 +31,11 @@ class User(BaseModel):
 
     @classmethod
     @aiowrap
-    def get_user(cls, tg_user: types.User) -> (bool, "User"):
-        query = User.select().where(cls.user_id == tg_user.id)
-        is_new = False
-        if not query.exists():
-            is_new = True
-            User.create_user(tg_user)
-
-        return is_new, query.get()
+    def get_user(cls, tg_user: types.User) -> ("User", bool):
+        return User.get_or_create(
+            user_id=tg_user.id,
+            username=tg_user.username,
+            first_name=tg_user.first_name,
+            last_name=tg_user.last_name,
+            locale=tg_user.locale,
+        )
