@@ -7,7 +7,7 @@ import fastconf
 
 # Bot
 SKIP_UPDATES = True
-BOT_TOKEN = "635489344:AAGORsfiEuBS0X1P6reD90yqKQrImgn3tw4"
+BOT_TOKEN = os.environ.get("BOT_TOKEN")
 LOGFILE = ""  # logs/bot.log
 OWNER_ID = 0  # your id for access to admin panel
 
@@ -32,10 +32,6 @@ DB_URL = "sqlite:///db.sqlite3"  # db.sqlite3
 # Redis
 REDIS_SETTINGS = {}
 
-# Init config
-fastconf.config(__name__)
-if "init" in sys.argv:
-    sys.exit(0)
 
 ROOT_DIR = os.path.dirname(os.path.abspath(sys.modules["__main__"].__file__))
 
