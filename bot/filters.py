@@ -8,7 +8,7 @@ from bot.misc import dp
 
 @dataclass
 class IsDigit(BoundFilter):
-    key = 'is_digit'
+    key = "is_digit"
     is_digit: bool
 
     async def check(self, msg: types.Message):

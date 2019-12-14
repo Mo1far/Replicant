@@ -1,3 +1,4 @@
+
 init:
 	python3 main.py init
 	make compiletext
@@ -20,3 +21,9 @@ update:
 
 build:
 	make compiletext
+
+lint:
+	isort --recursive bot/
+	black bot/
+	flake8 bot/
+
